@@ -18,7 +18,7 @@ def poly2mask(polys, classes, shape):
         poly = np.array(poly)
         poly[:, 0] *= mask.shape[1]
         poly[:, 1] *= mask.shape[0]
-        poly = poly.astype(np.int)
+        poly = poly.astype(np.int64)
         cv2.fillPoly(mask, [poly], class_)
     return mask
 

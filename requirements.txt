@@ -1,15 +1,16 @@
+pandas
+click
+tqdm
 numpy
-albumentations
-scipy
+opencv-python
 logzero
 yacs
-pandas
+asranger
+matplotlib
+albumentations
+segmentation_models_pytorch
+scipy
 torch >= 1.3.0
 torchvision >= 0.4.0
-segmentation_models_pytorch
-opencv-python
 tensorboardX
-opencv-python
-asranger
 resnest
-click

@@ -7,9 +7,14 @@ import matplotlib.pyplot as plt
 import cv2
 import numpy as np
 import segmentation_models_pytorch as smp
+from segmentation_models_pytorch import utils
 import argparse
 import torch
 import os
+# 下载encoder验证ssl错误
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 
@@ -21,7 +26,8 @@ args = parser.parse_args()
 
 ENCODER = 'se_resnext50_32x4d'
 ENCODER_WEIGHTS = 'imagenet'
-DEVICE = 'cuda'
+# DEVICE = 'cuda'
+DEVICE = 'cpu'
 
 CLASSES = VeRi3kParsingDataset.CLASSES
 ACTIVATION = 'sigmoid'
@@ -62,7 +68,7 @@ valid_loader = DataLoader(valid_dataset, batch_size=1,
 # IoU/Jaccard score - https://en.wikipedia.org/wiki/Jaccard_index
 
 # loss = smp.utils.losses.BCEDiceLoss(eps=1.)
-class BCEDiceLoss(smp.utils.losses.DiceLoss):
+class BCEDiceLoss(utils.losses.DiceLoss):
     __name__ = 'bce_dice_loss'
 
     def __init__(self, eps=1e-7, activation='sigmoid'):
@@ -77,7 +83,8 @@ class BCEDiceLoss(smp.utils.losses.DiceLoss):
 loss = BCEDiceLoss(eps=1.)
 metrics = [
     # smp.utils.metrics.IoUMetric(eps=1.),
-    smp.utils.metrics.IoU(eps=1.),
+    # smp.utils.metrics.IoU(eps=1.),
+    utils.metrics.IoU(eps=1.),
 ]
 
 optimizer = torch.optim.Adam([

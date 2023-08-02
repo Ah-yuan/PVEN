@@ -22,8 +22,10 @@ def get_training_albumentations():
         albu.ShiftScaleRotate(scale_limit=0.5, rotate_limit=0, shift_limit=0.1, p=1, border_mode=0),
         albu.PadIfNeeded(min_height=224, min_width=224, always_apply=True, border_mode=0),
         albu.RandomCrop(height=224, width=224, always_apply=True),
-        albu.IAAAdditiveGaussianNoise(p=0.2),
-        albu.IAAPerspective(p=0.5),
+        # albu.IAAAdditiveGaussianNoise(p=0.2),
+        albu.augmentations.transforms.GaussNoise(p=0.2),
+        # albu.IAAPerspective(p=0.5),
+        albu.augmentations.geometric.transforms.Perspective(p=0.5),
         albu.OneOf(
             [
                 albu.CLAHE(p=1),
@@ -35,7 +37,8 @@ def get_training_albumentations():
 
         albu.OneOf(
             [
-                albu.IAASharpen(p=1),
+                # albu.IAASharpen(p=1),
+                albu.augmentations.transforms.Sharpen(p=1),
                 albu.Blur(blur_limit=3, p=1),
                 albu.MotionBlur(blur_limit=3, p=1),
             ],

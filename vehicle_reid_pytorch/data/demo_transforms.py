@@ -1,5 +1,5 @@
 import albumentations as albu
-from albumentations.pytorch import ToTensor
+from albumentations.pytorch.transforms import ToTensor
 import numpy as np
 import cv2
 import torch
