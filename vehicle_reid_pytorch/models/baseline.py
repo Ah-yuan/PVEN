@@ -9,8 +9,9 @@ from torch import nn
 
 from resnest.torch import resnest50
 from torchvision.models import resnet50
-from torchvision.models.resnet import model_urls
-from torchvision.models.utils import load_state_dict_from_url
+# from torchvision.models.resnet import model_urls
+from torch.utils.model_zoo import load_url
+from torch.hub import load_state_dict_from_url
 from .backbones.resnet import ResNet, BasicBlock, Bottleneck
 from .backbones.senet import SENet, SEResNetBottleneck, SEBottleneck, SEResNeXtBottleneck
 from .backbones.resnet_ibn import resnet50_ibn_a

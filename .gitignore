@@ -1,5 +1,6 @@
 examples/EDA/*
 examples/outputs/*
+examples/*
 *.pth
 __pycache__
 *.egg-info

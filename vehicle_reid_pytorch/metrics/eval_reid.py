@@ -112,7 +112,14 @@ def eval_func_mp(distmat, q_pids, g_pids, q_camids, g_camids, max_rank=50, remov
     # for q_idx in tqdm(range(num_q), desc='Calc cmc and mAP'):
         # get query pid and camid
     # assert num_valid_q > 0, "Error: all query identities do not appear in gallery"
+    # print(all_cmc)
 
+    # 找到最大长度
+    max_length = max(len(arr) for arr in all_cmc)
+
+    # 使用np.pad()填充较短的列表
+    all_cmc = [np.pad(arr, (0, max_length - len(arr)), 'constant') for arr in all_cmc]
+    
     all_cmc = np.asarray(all_cmc).astype(np.float32)
     all_cmc = all_cmc.sum(0) / num_q
     mAP = np.mean(all_AP)

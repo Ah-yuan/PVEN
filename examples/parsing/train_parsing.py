@@ -26,8 +26,8 @@ args = parser.parse_args()
 
 ENCODER = 'se_resnext50_32x4d'
 ENCODER_WEIGHTS = 'imagenet'
-# DEVICE = 'cuda'
-DEVICE = 'cpu'
+DEVICE = 'cuda'
+# DEVICE = 'cpu'
 
 CLASSES = VeRi3kParsingDataset.CLASSES
 ACTIVATION = 'sigmoid'
